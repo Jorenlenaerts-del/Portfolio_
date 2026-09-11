@@ -185,29 +185,31 @@ function renderSketchSlideshow(slides) {
 
 function projectPanelHTML(project) {
   if (project.chapters?.length) {
-    const chapterMarkup = project.chapters.map((chapter, index) => {
-      const chapterPhotos = renderPhotoTrio(chapter.details, `chapter ${index + 1}`);
-      const introBlock = index === 0
-        ? `<div class="exp-title">${escapeHTML(project.title || '')}</div><div class="exp-cat">${escapeHTML(project.cat || '')}</div>`
-        : '';
-      const extraBlock = chapter.extra
-        ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(chapter.extra)}</p></div>`
-        : '';
+    const chapterMarkup = project.chapters
+      .map((chapter, index) => {
+        const chapterPhotos = renderPhotoTrio(chapter.details, `chapter ${index + 1}`);
+        const projectIntro = index === 0
+          ? `<div class="exp-title">${escapeHTML(project.title || '')}</div><div class="exp-cat">${escapeHTML(project.cat || '')}</div>`
+          : '';
+        const extraBlock = chapter.extra
+          ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(chapter.extra)}</p></div>`
+          : '';
 
-      return `
-        <div class="exp-row--main">
-          <div class="exp-text">
-            <div>
-              ${introBlock}
-              ${chapter.label ? `<div class="exp-chapter-label">${escapeHTML(chapter.label)}</div>` : ''}
-              <p class="exp-desc">${escapeHTML(chapter.desc || '')}</p>
+        return `
+          <div class="exp-row--main">
+            <div class="exp-text">
+              <div>
+                ${projectIntro}
+                ${chapter.label ? `<div class="exp-chapter-label">${escapeHTML(chapter.label)}</div>` : ''}
+                <p class="exp-desc">${escapeHTML(chapter.desc || '')}</p>
+              </div>
             </div>
           </div>
-        </div>
-        ${chapterPhotos ? `<div class="exp-row--trio">${chapterPhotos}</div>` : ''}
-        ${extraBlock}
-      `;
-    }).join('');
+          ${chapterPhotos ? `<div class="exp-row--trio">${chapterPhotos}</div>` : ''}
+          ${extraBlock}
+        `;
+      })
+      .join('');
 
     const projectExtra = project.extra
       ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.extra)}</p></div>`
@@ -235,10 +237,35 @@ function projectPanelHTML(project) {
   `;
 }
 
+function createSectionHeading(id, text) {
+  const heading = document.createElement('div');
+  heading.className = 'section-heading';
+  heading.id = id;
+  heading.textContent = text;
+  return heading;
+}
+
+function toggleProjectSlice(slice, shouldOpen) {
+  const isOpen = slice.classList.contains('open');
+  const nextState = typeof shouldOpen === 'boolean' ? shouldOpen : !isOpen;
+
+  document.querySelectorAll('.slice.open').forEach((item) => {
+    item.classList.remove('open');
+    item.setAttribute('aria-expanded', 'false');
+  });
+
+  if (nextState) {
+    slice.classList.add('open');
+    slice.setAttribute('aria-expanded', 'true');
+  }
+}
+
 function createProjectSlice(project, index) {
   const num = String(index + 1).padStart(2, '0');
   const src = project.img || placeholder(3240, 1350, project.bg, project.title);
   const imageStyle = project.title === 'Echo' ? 'object-position: center bottom;' : '';
+  const projectTitle = escapeHTML(project.title || 'Project');
+  const projectCategory = escapeHTML(project.cat || '');
 
   const slice = document.createElement('div');
   slice.className = 'slice';
@@ -248,13 +275,13 @@ function createProjectSlice(project, index) {
   slice.setAttribute('aria-expanded', 'false');
 
   slice.innerHTML = `
-    <img src="${src}" alt="${escapeHTML(project.title)}" loading="lazy" style="${imageStyle}">
+    <img src="${src}" alt="${projectTitle}" loading="lazy" style="${imageStyle}">
     <div class="slice-index">${num}</div>
     <div class="slice-over">
       <div class="slice-meta">
-        <span class="slice-title">${escapeHTML(project.title)}</span>
+        <span class="slice-title">${projectTitle}</span>
         <div class="slice-line"></div>
-        <span class="slice-cat">${escapeHTML(project.cat)}</span>
+        <span class="slice-cat">${projectCategory}</span>
       </div>
     </div>
     <div class="exp-panel">
@@ -263,33 +290,19 @@ function createProjectSlice(project, index) {
     </div>
   `;
 
-  const toggleOpen = () => {
-    const isOpen = slice.classList.contains('open');
-    document.querySelectorAll('.slice.open').forEach((item) => {
-      item.classList.remove('open');
-      item.setAttribute('aria-expanded', 'false');
-    });
-
-    if (!isOpen) {
-      slice.classList.add('open');
-      slice.setAttribute('aria-expanded', 'true');
-    }
-  };
-
   slice.addEventListener('click', (event) => {
     if (event.target.closest('.exp-close')) {
-      slice.classList.remove('open');
-      slice.setAttribute('aria-expanded', 'false');
+      toggleProjectSlice(slice, false);
       return;
     }
 
-    toggleOpen();
+    toggleProjectSlice(slice);
   });
 
   slice.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      toggleOpen();
+      toggleProjectSlice(slice);
     }
   });
 
@@ -313,9 +326,12 @@ function createQuadGroup(project) {
 
 /* ── RENDER FEED ── */
 const themeToggle = document.querySelector('.theme-toggle');
+const navToggle = document.querySelector('.nav-toggle');
+const siteNav = document.querySelector('.site-nav');
 const prefersLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+const body = document.body;
 
-document.body.classList.toggle('light-mode', prefersLightMode);
+body.classList.toggle('light-mode', prefersLightMode);
 
 if (themeToggle) {
   const updateThemeToggle = (isLight) => {
@@ -324,10 +340,28 @@ if (themeToggle) {
 
   updateThemeToggle(prefersLightMode);
   themeToggle.addEventListener('click', () => {
-    const isLight = document.body.classList.toggle('light-mode');
+    const isLight = body.classList.toggle('light-mode');
     updateThemeToggle(isLight);
     themeToggle.classList.remove('is-changing');
     requestAnimationFrame(() => themeToggle.classList.add('is-changing'));
+  });
+}
+
+if (navToggle && siteNav) {
+  const closeNavMenu = () => {
+    siteNav.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open menu');
+  };
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+
+  siteNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => closeNavMenu());
   });
 }
 
@@ -337,19 +371,11 @@ if (!feed) {
   throw new Error('The #feed element was not found.');
 }
 
-const productDesignHeader = document.createElement('div');
-productDesignHeader.className = 'section-heading';
-productDesignHeader.id = 'product-design';
-productDesignHeader.textContent = 'Product Design';
-feed.appendChild(productDesignHeader);
+feed.appendChild(createSectionHeading('product-design', 'Product Design'));
 
 projects.forEach((project, index) => {
   if (project.layout === 'quad-group') {
-    const graphicDesignHeader = document.createElement('div');
-    graphicDesignHeader.className = 'section-heading';
-    graphicDesignHeader.id = 'grafisch-design';
-    graphicDesignHeader.textContent = 'Grafisch Design';
-    feed.appendChild(graphicDesignHeader);
+    feed.appendChild(createSectionHeading('grafisch-design', 'Grafisch Design'));
     feed.appendChild(createQuadGroup(project));
     return;
   }
@@ -385,17 +411,17 @@ feed.after(about);
 
 /* ── SCROLL OBSERVER ── */
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, idx) => {
+  entries.forEach((entry, index) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), idx * 60);
+      setTimeout(() => entry.target.classList.add('visible'), index * 60);
       observer.unobserve(entry.target);
     }
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-document.querySelectorAll('.slice').forEach(s => observer.observe(s));
+document.querySelectorAll('.slice').forEach((slice) => observer.observe(slice));
 
-document.querySelector('a[href="#about"]')?.addEventListener('click', e => {
-  e.preventDefault();
-  document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+document.querySelector('a[href="#about"]')?.addEventListener('click', (event) => {
+  event.preventDefault();
+  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
 });
