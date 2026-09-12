@@ -86,14 +86,20 @@ const projects = [
     title: 'Be-Flow',
     cat: 'Fusion · Conceptual design',
     img: "./Public/Foto's/be-flow-01.webp",
-    details: ['', "./Public/Foto's/be-flow-02.webp", "./Public/Foto's/be-flow-03.webp"],
+    details: ["./Public/Foto's/be-flow-01.webp", "./Public/Foto's/be-flow-02.webp", "./Public/Foto's/be-flow-03.webp"],
+    afterText: 'Tijdens het modeleren is er veel aandacht naar de continuiteit van de surfaces gegaan. Dankzij de T splines/Nurb modeling techniek was de continuiteit verzekerd. Het eindontwerp van de wijnhouder in deze serie is ook verder ontwikkeld. Zo is de voet aangepast, samen met de krullen in de "wake". Deze aanpassingen zorgen voor een beter passend',
+    afterTextPhotos: [
+      "./Public/Foto's/be-flow-04.webp",
+      "./Public/Foto's/be-flow-05.webp",
+      "./Public/Foto's/be-flow-06.webp",
+    ],
     desc: 'Be-Flow is een ontwerpconcept waarbij aerodynamica de vorm bepaald. In plaas van luchtstromen te weerstaan worden deze ontarmd en gebruikt om de vorm te creëren. In mijn concept zijn er drie ontwerpen gemaakt. Een stoel, lamp en wijnhouder. De drie ontwerpen zijn in deze volgorde ontworpen. Het tekenen in Fusion van deze modellen was een groeiproces, maar dankzij hun T spline form en mijn ervaring met het Echo project heeft hier bij geholpen.Met de functie van de objecten in het achterhoofd wordt de vorm door de "wake" vereenvoudigd en omgevormd tot een organish object.',
     tags: [],
     bg: '#120e06',
   },
   {
-    title: 'Design thinking',
-    cat: ' · How i work and think as a designer',
+    title: 'Reimagine NMBS',
+    cat: ' · Figma',
     desc: 'Een verzameling van projecten waarin elke fase van het ontwerp aan bod komt.',
     tags: ['CAD', 'Surfaces'],
     bg: '#0f1118',
@@ -220,6 +226,7 @@ function projectPanelHTML(project) {
 
   const focusPosition = project.title === 'Echo' ? 'center bottom' : 'center';
   const photos = renderPhotoTrio(project.details, 'detail', focusPosition);
+  const afterTextPhotos = renderPhotoTrio(project.afterTextPhotos, 'screenshot');
   const slideshow = renderSketchSlideshow(project.slideshow);
 
   return `
@@ -233,6 +240,8 @@ function projectPanelHTML(project) {
       </div>
     </div>
     ${slideshow || (photos ? `<div class="exp-row--trio">${photos}</div>` : '')}
+    ${project.afterText ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.afterText)}</p></div>` : ''}
+    ${afterTextPhotos ? `<div class="exp-row--trio">${afterTextPhotos}</div>` : ''}
     ${project.extra ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.extra)}</p></div>` : ''}
   `;
 }
