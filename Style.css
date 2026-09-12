@@ -290,7 +290,7 @@ body.light-mode .theme-icon-moon { opacity: 1; transform: rotate(0) scale(1); }
   overflow: hidden;
   cursor: pointer;
   border: 1px solid rgba(242, 242, 240, 0.14);
-  border-radius: 4px;
+  border-radius: 0;
   opacity: 0;
   transform: translateY(60px) rotate(var(--fan-rot, -1.5deg)) scale(0.97);
   transform-origin: bottom left;
@@ -395,10 +395,11 @@ body.light-mode .slice-cat {
 
 /* ── EXPAND PANEL ── */
 .exp-panel {
+  --exp-inset: 44px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  background: var(--card-bg-deep);
+  background: var(--card-bg);
 }
 
 .slice.open .exp-panel {
@@ -420,12 +421,12 @@ body.light-mode .slice-cat {
 .exp-row--main {
   display: flex;
   background: var(--card-bg-deep);
-  margin-bottom: 3px;
+  margin-bottom: 0;
 }
 
 .exp-text {
   flex: 1;
-  padding: 48px 44px;
+  padding: 24px var(--exp-inset);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -455,19 +456,52 @@ body.light-mode .slice-cat {
   white-space: pre-line;
 }
 
+.exp-video {
+  position: relative;
+  width: auto;
+  aspect-ratio: 16 / 9;
+  margin: 0 var(--exp-inset) 3px;
+  overflow: hidden;
+  background: var(--card-bg-alt);
+}
+
+.exp-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
 /* RIJ 2 — 3 foto's naast elkaar */
 .exp-row--trio {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: auto;
+  margin-left: var(--exp-inset);
+  margin-right: var(--exp-inset);
+  align-self: stretch;
   gap: 3px;
-  height: 280px;
   margin-bottom: 3px;
+  background: var(--card-bg);
+}
+
+.exp-row--trio:has(> :nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.exp-row--trio:has(> :only-child) {
+  grid-template-columns: 1fr;
+}
+
+.exp-row--trio:has(> :only-child) .exp-photo-trio {
+  aspect-ratio: 32 / 9;
 }
 
 .exp-photo-trio {
-  flex: 1;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: var(--card-bg-alt);
-  transform: translateY(-15px);
+  background: var(--card-bg);
 }
 
 .exp-photo-trio img {
@@ -483,7 +517,9 @@ body.light-mode .slice-cat {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 3px;
-  background: var(--card-bg-deep);
+  background: var(--card-bg);
+  margin-left: var(--exp-inset);
+  margin-right: var(--exp-inset);
   margin-bottom: 3px;
 }
 
@@ -492,8 +528,8 @@ body.light-mode .slice-cat {
   min-width: 0;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: var(--card-bg-alt);
-  border-radius: 4px;
+  background: var(--card-bg);
+  border-radius: 0;
   padding: 0;
 }
 
@@ -529,7 +565,7 @@ body.light-mode .slice-cat {
 /* RIJ 3 — extra tekst volledig breed */
 .exp-row--extra {
   background: var(--card-bg);
-  padding: 40px 44px;
+  padding: 40px var(--exp-inset);
   margin-bottom: 3px;
 }
 
@@ -581,7 +617,7 @@ body.light-mode .slice-cat {
 
 .quad-cell {
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 0;
   background: var(--card-bg);
 }
 
@@ -682,7 +718,7 @@ body.light-mode .slice-cat {
 
 .about-photo-block {
   background: var(--card-bg-alt);
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1 / 1;
 }
@@ -715,6 +751,7 @@ footer span {
 ════════════════════════════════ */
 
 @media (max-width: 768px) {
+  .exp-panel { --exp-inset: 20px; }
   nav { padding: 16px 20px; }
   .nav-links { gap: 16px; }
   .nav-links a { font-size: 10px; }
@@ -726,7 +763,7 @@ footer span {
     gap: 12px;
   }
 
-  .slice-title { font-size: 16px; }
+  .slice-title { font-size: 18px; }
   .slice-meta { min-width: 0; max-width: 100%; }
   .slice-title {
     display: block;
@@ -742,9 +779,16 @@ footer span {
     background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
   }
 
-  .exp-row--trio { height: 140px; }
-  .exp-text { padding: 24px 20px; }
-  .exp-row--extra { padding: 24px 20px; }
+  .exp-text { padding: 24px var(--exp-inset); }
+  .exp-row--trio {
+    margin-left: var(--exp-inset);
+    margin-right: var(--exp-inset);
+  }
+  .sketch-gallery {
+    margin-left: var(--exp-inset);
+    margin-right: var(--exp-inset);
+  }
+  .exp-row--extra { padding: 24px var(--exp-inset); }
 
   .sketch-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 

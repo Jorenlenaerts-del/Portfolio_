@@ -4,8 +4,8 @@ const projects = [
     cat: 'Automotive · Fusion · Keyshot',
     img: "./Public/Foto's/nova-01.webp",
     details: ["./Public/Foto's/nova-02.webp", "./Public/Foto's/nova-03.webp", "./Public/Foto's/nova-04.webp"],
-    desc: 'Nova is een conceptontwerp van kop en achterlichten geïnspireerd op Audi en Mercedes-Benz. Op basis van een Echo, een eerder ontwerp van mezelf heb ik passende lichten toegevoegd aan mijn CAD-model. Als er iets is dat autos een uitstraling geven zijn het wel de lichten. Zelf had ik nog maar weinig projecten waar detail in de kijker stond. Hierdoor heb ik gekozen om enkel de lichten uit te werken en er renders van te maken als concepteel idee. ',
-    extra: 'Dankzij de bepaalde hoeveelheid detail in de lichten kwamen de renders er sterk uit. Hiervoor heb ik Keyshot gebruikt en gewerkt met focus en blurr voor een artistiek.',
+    desc: 'NOVA is een conceptontwerp van kop- en achterlichten voor de sculpturale vorm van ECHO, een eerder project. De inspiratie voor dit ontwerp haalde ik uit modellen van Audi en Mercedes-Benz. Lichten bepalen voor een groot deel de uitstraling van een auto.',
+    extra: 'Ik heb ervoor gekozen om enkel de lichten van ECHO in detail uit te werken, zodat ik meer detailwerk in het CAD-model kon stoppen. Dankzij dit detailwerk heb ik in KeyShot veelzijdig kunnen experimenteren, met een focus op blur- en motionrenders. Alle kleine elementen en details in het model hebben een grote impact op het renderen en zorgen voor een compleet beeld van het concept.',
     tags: ['Automotive', 'Fusion', 'Render', 'Concept'],
     bg: '#10101a',
     
@@ -15,7 +15,7 @@ const projects = [
     cat: 'Automotive · CATIA · Imagine and Shape',
     img: "./Public/Foto's/lmp-01.webp",
     details: ['./Public/Foto\'s/lmp-02.webp', './Public/Foto\'s/lmp-03.webp', './Public/Foto\'s/lmp-04.webp'],
-    desc: 'In mijn vrije tijd ben ik veel bezig met het maken van concept ontwerpen. Dit project is representatief van wat ik op vijf uur kan tekenen binnen Imagine and shape. Het hele modeleerproces is opgenomen via Youtube zodat mensen binnen HydroTeam hier de nodige info uit kunnen halen. Het idee: Een Lmp concept wagen waar gebaseerd op een 3D model met eigen inbreng. Imagine and shape gebruik ik graag om concepten en complexe geometrieën snel te visualiseren. Wat in tradisionele CAD dagen duurt teken je hier op minder dan 10 minuten.',
+    desc: 'In mijn vrije tijd teken ik veel concept ontwerpen. Hiermee kan ik snel ideeën van 2D of zelfs uit mijn hoofd vertalen naar een sterk 3D model. Bij het modeleerproces kom je tot nieuwe inzichten — interessante en complexe punten die je al productiegericht laten nadenken. Wat in traditionele CAD software soms dagen duurt, visualiseer ik met SubD modeling en niet-destructive workflows snel. Mesh modeling werkt zonder geheugen, deze aanpak geeft me flexibiliteit in het modeleren van de surface bodys.',
     tags: ['CATIA I&S', 'NURBS', 'Hydroteam'],
     bg: '#120a0a',
   },
@@ -63,7 +63,9 @@ const projects = [
     cat: 'UX design · Healthcare',
     img: "./Public/Foto's/curanova-01.webp",
     details: ["./Public/Foto's/curanova-02.webp", "./Public/Foto's/curanova-03.webp"],
+    video: 'https://www.youtube.com/embed/a3V8hHtztDM',
     desc: 'In het kader van het vak User-Centered Design ontwikkelden we een product binnen een specifieke context, gebaseerd op Embodied Interactions en UX-theorie. De focus lag op de interactie tussen gebruiker en product, waarbij we theoretische inzichten vertaalden naar een tastbaar ontwerp. We kozen voor context drie: het ontwerpen van een product voor een dienst waarmee mensen met mentale gezondheidsproblemen anoniem steunende digitale brieven kunnen ontvangen van lotgenoten. Voor dit project werkte ik samen met Falke van den Heuvel.',
+    extra: 'Tijdens dit proces zijn we door verschillende iteraties gegaan. Op zoek naar een handeling tussen product en gebruiker, maar ook naar de juiste vorm. Door onderzoek, personas, schetsen en feedback momenten zijn we gegroeid in het UX denkkader. ',
     tags: ['Figma', 'UX', 'Healthcare'],
     bg: '#120e06',
   },
@@ -78,7 +80,7 @@ const projects = [
       { src: "./Public/Foto's/sketching-04.webp", label: 'Schets 3' },
       { src: "./Public/Foto's/sketching-05.webp", label: 'Schets 4' },
     ],
-    desc: 'TIjdens mijn opleidingen heb ik verschillende lessen gehad rond (digitaal) schetsen. Hier gebruikt ik Photoshop of pen en papier om snelle idee uit te werken. Daarnaast gebruik ik ook Vizcom om snel concepten te visualiseren met benaderingen van lichtinvallen en schaduwen wat het tekenproces versnelt.',
+    desc: 'Tijdens mijn opleidingen heb ik verschillende lessen gehad rond digitaal schetsen. Ik gebruik Photoshop, pen en papier om snelle concepten uit te werken. Vizcom is mijn voorkeurstool voor snelle visualisaties met realistische licht- en textuurrenders. Dit versnelt mijn tekenproces, daarnaast heb ik ook al liveries uitgewerkt, hier teken ik vaak de voor en zijaanzichten, daarna laat ik geregeld een drie-kwart aanzicht genereren via AI.',
     tags: ['Photoshop', 'Vizcom', 'Sketching'],
     bg: '#120e06',
   },
@@ -228,6 +230,9 @@ function projectPanelHTML(project) {
   const photos = renderPhotoTrio(project.details, 'detail', focusPosition);
   const afterTextPhotos = renderPhotoTrio(project.afterTextPhotos, 'screenshot');
   const slideshow = renderSketchSlideshow(project.slideshow);
+  const video = project.video
+    ? `<div class="exp-video"><iframe src="${escapeHTML(project.video)}" title="${escapeHTML(project.title || 'Project video')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`
+    : '';
 
   return `
     <div class="exp-row--main">
@@ -239,6 +244,7 @@ function projectPanelHTML(project) {
         </div>
       </div>
     </div>
+    ${video}
     ${slideshow || (photos ? `<div class="exp-row--trio">${photos}</div>` : '')}
     ${project.afterText ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.afterText)}</p></div>` : ''}
     ${afterTextPhotos ? `<div class="exp-row--trio">${afterTextPhotos}</div>` : ''}
