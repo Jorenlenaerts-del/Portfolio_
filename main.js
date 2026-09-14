@@ -6,7 +6,6 @@ const projects = [
     details: ["./Public/Foto's/nova-02.webp", "./Public/Foto's/nova-03.webp", "./Public/Foto's/nova-04.webp"],
     desc: 'NOVA is een conceptontwerp van kop- en achterlichten voor de sculpturale vorm van ECHO, een eerder project. De inspiratie voor dit ontwerp haalde ik uit modellen van Audi en Mercedes-Benz. Lichten bepalen voor een groot deel de uitstraling van een auto.',
     extra: 'Ik heb ervoor gekozen om enkel de lichten van ECHO in detail uit te werken, zodat ik meer detailwerk in het CAD-model kon stoppen. Dankzij dit detailwerk heb ik in KeyShot veelzijdig kunnen experimenteren, met een focus op blur- en motionrenders. Alle kleine elementen en details in het model hebben een grote impact op het renderen en zorgen voor een compleet beeld van het concept.',
-    tags: ['Automotive', 'Fusion', 'Render', 'Concept'],
     bg: '#10101a',
     
   },
@@ -16,14 +15,12 @@ const projects = [
     img: "./Public/Foto's/lmp-01.webp",
     details: ['./Public/Foto\'s/lmp-02.webp', './Public/Foto\'s/lmp-03.webp', './Public/Foto\'s/lmp-04.webp'],
     desc: 'In mijn vrije tijd teken ik veel concept ontwerpen. Hiermee kan ik snel ideeën van 2D of zelfs uit mijn hoofd vertalen naar een sterk 3D model. Bij het modeleerproces kom je tot nieuwe inzichten — interessante en complexe punten die je al productiegericht laten nadenken. Wat in traditionele CAD software soms dagen duurt, visualiseer ik met SubD modeling en niet-destructive workflows snel. Mesh modeling werkt zonder geheugen, deze aanpak geeft me flexibiliteit in het modeleren van de surface bodys.',
-    tags: ['CATIA I&S', 'NURBS', 'Hydroteam'],
     bg: '#120a0a',
   },
   {
     title: 'A story: HydroTeam',
     cat: 'CAD · CFD optimization · Production',
     img: "./Public/Foto's/ligier-01.webp",
-    tags: ['CATIA', 'Hydroteam', 'Le Mans'],
     bg: '#120e06',
     chapters: [
       {
@@ -55,7 +52,6 @@ const projects = [
     details: ["./Public/Foto's/albatross-02.webp", "./Public/Foto's/albatross-03.webp",],
     desc: 'Tijdens de XDW-week volgde ik een workshop rond CFD en ontwerpoptimalisatie onder leiding van Voxdale, samen met Oscar de Wit en Louis de Bie werkten we aan een drone met verwisselbare cargo, geïnspireerd op de albatros (vogel). Via CFD-simulaties in AirShaper verfijnden we ons ontwerp. Mijn rol richtte zich op het modelleren van de vleugels.',
     extra: 'Dankzij de CFD-analyse konden we in model 1 kritieke zones identificeren, met name rond de neus, de vleugels en de luchtstroming naar de achterzijde. Na het doorvoeren van onze optimalisaties werden deze aandachtspunten zichtbaar verbeterd, de resultaten zijn duidelijk zichtbaar in model 2.',
-    tags: ['CAD', 'CFD'],
     bg: '#0a0d14',
   },
   {
@@ -66,7 +62,6 @@ const projects = [
     video: 'https://www.youtube.com/embed/a3V8hHtztDM',
     desc: 'In het kader van het vak User-Centered Design ontwikkelden we een product binnen een specifieke context, gebaseerd op Embodied Interactions en UX-theorie. De focus lag op de interactie tussen gebruiker en product, waarbij we theoretische inzichten vertaalden naar een tastbaar ontwerp. We kozen voor context drie: het ontwerpen van een product voor een dienst waarmee mensen met mentale gezondheidsproblemen anoniem steunende digitale brieven kunnen ontvangen van lotgenoten. Voor dit project werkte ik samen met Falke van den Heuvel.',
     extra: 'Tijdens dit proces zijn we door verschillende iteraties gegaan. Op zoek naar een handeling tussen product en gebruiker, maar ook naar de juiste vorm. Door onderzoek, personas, schetsen en feedback momenten zijn we gegroeid in het UX denkkader. ',
-    tags: ['Figma', 'UX', 'Healthcare'],
     bg: '#120e06',
   },
   {
@@ -81,7 +76,6 @@ const projects = [
       { src: "./Public/Foto's/sketching-05.webp", label: 'Schets 4' },
     ],
     desc: 'Tijdens mijn opleidingen heb ik verschillende lessen gehad rond digitaal schetsen. Ik gebruik Photoshop, pen en papier om snelle concepten uit te werken. Vizcom is mijn voorkeurstool voor snelle visualisaties met realistische licht- en textuurrenders. Dit versnelt mijn tekenproces, daarnaast heb ik ook al liveries uitgewerkt, hier teken ik vaak de voor en zijaanzichten, daarna laat ik geregeld een drie-kwart aanzicht genereren via AI.',
-    tags: ['Photoshop', 'Vizcom', 'Sketching'],
     bg: '#120e06',
   },
   {
@@ -89,22 +83,14 @@ const projects = [
     cat: 'Fusion · Conceptual design',
     img: "./Public/Foto's/be-flow-01.webp",
     details: ["./Public/Foto's/be-flow-01.webp", "./Public/Foto's/be-flow-02.webp", "./Public/Foto's/be-flow-03.webp"],
-    afterText: 'Tijdens het modeleren is er veel aandacht naar de continuiteit van de surfaces gegaan. Dankzij de T splines/Nurb modeling techniek was de continuiteit verzekerd. Het eindontwerp van de wijnhouder in deze serie is ook verder ontwikkeld. Zo is de voet aangepast, samen met de krullen in de "wake". Deze aanpassingen zorgen voor een beter passend',
     afterTextPhotos: [
       "./Public/Foto's/be-flow-04.webp",
       "./Public/Foto's/be-flow-05.webp",
       "./Public/Foto's/be-flow-06.webp",
     ],
-    desc: 'Be-Flow is een ontwerpconcept waarbij aerodynamica de vorm bepaald. In plaas van luchtstromen te weerstaan worden deze ontarmd en gebruikt om de vorm te creëren. In mijn concept zijn er drie ontwerpen gemaakt. Een stoel, lamp en wijnhouder. De drie ontwerpen zijn in deze volgorde ontworpen. Het tekenen in Fusion van deze modellen was een groeiproces, maar dankzij hun T spline form en mijn ervaring met het Echo project heeft hier bij geholpen.Met de functie van de objecten in het achterhoofd wordt de vorm door de "wake" vereenvoudigd en omgevormd tot een organish object.',
-    tags: [],
+    desc: 'Be-Flow is een ontwerpgedachte waarin vormen ontstaan door luchtstromen rondom objecten te visualiseren en in te vriezen. In plaats van lucht tegen te gaan, laat je de beweging vormen definiëren. In dit project heb ik dit concept toegepast op drie schalen: een stoel rondom het menselijk lichaam, een bureaulamp rondom een lamp, en een wijnhouder rondom een fles.',
+    extra: 'De ontwerpen zijn getekend in Fusion met NURBS/T-spline techniek. Deze techniek biedt zekerheid in surface overgangen die altijd netjes aansluiten. De echte struikelblokken waren praktisch: zorgen dat de wijnhouder stabiel stond, de lamp goed paste, en de stoel doordacht was in vulling.\n\nDe wijnhouder heb ik later nog verder ontwikkeld. De voet en de krullen in de "wake" opnieuw getekend zodat het geheel completer voelde. Het 3D-printen van bepaalde onderdelen verliep moeizaam omdat scherpe punten ontstonden. Dit leerde me hoe design voor productie kritisch is: elegante vormen moeten ook praktisch bruikbaar zijn.',
     bg: '#120e06',
-  },
-  {
-    title: 'Reimagine NMBS',
-    cat: ' · Figma',
-    desc: 'Een verzameling van projecten waarin elke fase van het ontwerp aan bod komt.',
-    tags: ['CAD', 'Surfaces'],
-    bg: '#0f1118',
   },
   {
     title: 'Echo',
@@ -113,7 +99,6 @@ const projects = [
     details: ["./Public/Foto's/echo-02.webp"],
     desc: 'Echo is een Bachelor project omtrent vorm en CFD optimalisatie. Door gebruik te maken van Fusion en de Nurb modeling functie is het mogelijk om een organische vorm te creëren zonder complexe surfaceing. Deze vorm is vervolgens geanalyseerd door middel van CFD simulaties in Autodesk CFD. Dit was het eerste project met deze software, het is ook allemaal zelf studie geweest waardoor het voor mij een zeer complex, maar interessant en leerrijk project is geworden. Tijdens dit project ben ik ook gelimiteerd geweest door de kracht van de computer. Dit omdat de mesh te complex was voor de computer.',
     extra: '',
-    tags: ['CAD', 'CFD'],
     bg: '#120e06',
   },
   {
@@ -121,8 +106,9 @@ const projects = [
     cat: 'Solidworks · Production',
     img: "./Public/Foto's/tribute-table-01.webp",
     details: ["./Public/Foto's/tribute-table-03.webp", "./Public/Foto's/tribute-table-02.webp"],
-    desc: 'Voor het vak multiple design heb ik een tafel ontworpen. Deze tafel is qua kleuren gebaseerd op verschillende iconische liveries van Mclaren. Dit ontwerp zorgde voor het daadwerkelijk gebruik maken van afwerkingstechnieken. Zo is het frame gepoedercoat, de modulaire delen ge 3D print en de plaat gepolished en ge wet-sand',
-    tags: [],
+    desc: 'Voor het vak multiple design kreeg ik de opdracht een ontwerp te maken voor grotere oplagen met focus op afwerkingstechnieken. Ik ontwerp een modulaire tafel geïnspireerd op iconische kleuren uit de Formule 1 wereld. Het tafelblad is verwisselbaar, zodat kleurencombinaties kunnen variëren.',
+    afterText: 'Het frame is gepoedercoat, de modules voor de verbinding van tafel naar frame zijn 3D-geprint, en het tafelblad is wet-sanded en gepolished. Deze combinatie toont hoe je materialen en technieken kunt mengen in één object, en hoe modulariteit productie flexibel maakt.',
+    afterTextPhotos: ["./Public/Foto's/tribute-table-04.webp"],
     bg: '#120e06',
   },
   {
@@ -178,7 +164,7 @@ function renderSketchSlideshow(slides) {
   if (!slides?.length) return '';
 
   const slideMarkup = slides.map((slide, index) => `
-    <figure class="sketch-slide" data-slide="${index}">
+    <figure class="sketch-slide">
       <img src="${slide.src}" alt="${escapeHTML(slide.label || `sketch ${index + 1}`)}" loading="${index === 0 ? 'eager' : 'lazy'}">
       <figcaption>${escapeHTML(slide.label || `Sketch ${index + 1}`)}</figcaption>
     </figure>
@@ -246,9 +232,11 @@ function projectPanelHTML(project) {
     </div>
     ${video}
     ${slideshow || (photos ? `<div class="exp-row--trio">${photos}</div>` : '')}
-    ${project.afterText ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.afterText)}</p></div>` : ''}
-    ${afterTextPhotos ? `<div class="exp-row--trio">${afterTextPhotos}</div>` : ''}
+    ${project.afterText && afterTextPhotos
+      ? `<div class="exp-row--extra-with-photo"><p class="exp-extra">${escapeHTML(project.afterText)}</p><div class="exp-row--trio">${afterTextPhotos}</div></div>`
+      : project.afterText ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.afterText)}</p></div>` : ''}
     ${project.extra ? `<div class="exp-row--extra"><p class="exp-extra">${escapeHTML(project.extra)}</p></div>` : ''}
+    ${!project.afterText && afterTextPhotos ? `<div class="exp-row--trio">${afterTextPhotos}</div>` : ''}
   `;
 }
 
