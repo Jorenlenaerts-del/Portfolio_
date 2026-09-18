@@ -162,7 +162,7 @@ function renderPhotoTrio(photos, altPrefix = 'detail', focusPosition = 'center')
     .filter(Boolean)
     .map((src, index) => `
       <div class="exp-photo-trio">
-        <img src="${src}" alt="${altPrefix} ${index + 1}" loading="lazy" style="object-position: ${focusPosition};">
+        <img src="${src}" alt="${altPrefix} ${index + 1}" loading="eager" style="object-position: ${focusPosition};">
       </div>
     `)
     .join('');
@@ -174,7 +174,7 @@ function renderAutoSlideshow(photos, altPrefix = 'slideshow') {
   return `
     <div class="auto-slideshow" aria-label="Automatische slideshow">
       ${slides.map((src, index) => `
-        <img class="auto-slide${index === 0 ? ' is-active' : ''}" src="${src}" alt="${altPrefix} ${index + 1}" loading="lazy">
+        <img class="auto-slide${index === 0 ? ' is-active' : ''}" src="${src}" alt="${altPrefix} ${index + 1}" loading="eager">
       `).join('')}
     </div>
   `;
@@ -185,7 +185,7 @@ function renderSketchSlideshow(slides) {
 
   const slideMarkup = slides.map((slide, index) => `
     <figure class="sketch-slide">
-      <img src="${slide.src}" alt="${escapeHTML(slide.label || `sketch ${index + 1}`)}" loading="${index === 0 ? 'eager' : 'lazy'}">
+      <img src="${slide.src}" alt="${escapeHTML(slide.label || `sketch ${index + 1}`)}" loading="eager">
       <figcaption>${escapeHTML(slide.label || `Sketch ${index + 1}`)}</figcaption>
     </figure>
   `).join('');
@@ -241,7 +241,7 @@ function projectPanelHTML(project) {
   const afterTextPhotos = renderPhotoTrio(project.afterTextPhotos, 'screenshot');
   const slideshow = renderSketchSlideshow(project.slideshow);
   const video = project.videoFile
-    ? `<div class="exp-video"><video src="${escapeHTML(project.videoFile)}" title="${escapeHTML(project.title || 'Project video')}" autoplay muted loop playsinline preload="metadata"></video></div>`
+    ? `<div class="exp-video"><video src="${escapeHTML(project.videoFile)}" poster="${escapeHTML(project.img || '')}" title="${escapeHTML(project.title || 'Project video')}" autoplay muted loop playsinline preload="metadata"></video></div>`
     : project.video
       ? `<div class="exp-video"><iframe src="${escapeHTML(project.video)}" title="${escapeHTML(project.title || 'Project video')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`
       : '';
@@ -316,7 +316,7 @@ function createProjectSlice(project, index) {
   slice.setAttribute('aria-expanded', 'false');
 
   slice.innerHTML = `
-    <img src="${src}" alt="${projectTitle}" loading="lazy" style="${imageStyle}">
+    <img src="${src}" alt="${projectTitle}" loading="eager" style="${imageStyle}">
     <div class="slice-index">${num}</div>
     <div class="slice-over">
       <div class="slice-meta">
@@ -360,7 +360,7 @@ function createQuadGroup(project) {
     const cell = document.createElement('div');
     cell.className = 'quad-cell';
     const src = item.img || placeholder(648, 648, project.bg, item.title);
-    cell.innerHTML = `<img src="${src}" alt="${escapeHTML(item.title)}" loading="lazy">`;
+    cell.innerHTML = `<img src="${src}" alt="${escapeHTML(item.title)}" loading="eager">`;
     stage.appendChild(cell);
   });
 
