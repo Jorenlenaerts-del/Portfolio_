@@ -1,0 +1,11 @@
+/*
+  Keep the entry point and versioned assets fresh after each deploy.
+*/
+/index.html
+  Cache-Control: no-cache, must-revalidate
+
+/*.css
+  Cache-Control: no-cache, must-revalidate
+
+/*.js
+  Cache-Control: no-cache, must-revalidate
