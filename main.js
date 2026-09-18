@@ -37,6 +37,16 @@ const projects = [
         label: 'Grafisch ontwerp — Tussentijds',
         desc: 'Naast het CAD werk neem ik ook sommige grafische taken van het team op mij. In de zomer van 2025 heb ik gewerkt rond hun nieuw logo en merch. Deze opdrachten zijn niet constant aangezien ik het druk genoeg heb met de technische kant van het team. Het blijft wel bij als een leuke ervaring en een teken van vertrouwen in wat ik doe als grafisch ontwerper.',
         details: ['./Public/Foto\'s/ht-01.webp', './Public/Foto\'s/ht-02.webp', './Public/Foto\'s/ht-03.webp'],
+        slideshow: [
+          "./Public/Foto's/Radical_RXC_Livery1b.webp",
+          "./Public/Foto's/Radical_RXC_Livery2b.webp",
+          "./Public/Foto's/Radical_RXC_Livery3b.webp",
+          "./Public/Foto's/Radical_RXC_Livery4b.webp",
+          "./Public/Foto's/Radical_RXC_Livery5b.webp",
+          "./Public/Foto's/Radical_RXC_Livery6b.webp",
+          "./Public/Foto's/Radical_RXC_Livery7b.webp",
+        ],
+        slideshowText: 'Eerst heb ik twee aanzichten getekend in photoshop. Zowel een voor als zijaanzicht. Dankzij deze schetsen heb ik een acuraat beeld kunnen laten genereren via Gemini. Deze tweepuntsperspectief renders tonen het eindresultaat. Het gebruik van AI heeft mij tijdens deze opdracht geholpen, natuurlijk moeten we wel kritisch kijken op de output. Zo zijn er zeker nog fouten te vinden binnen de renders.',
       },
     ],
   },
@@ -158,10 +168,7 @@ function renderPhotoTrio(photos, altPrefix = 'detail', focusPosition = 'center')
 }
 
 function renderAutoSlideshow(photos, altPrefix = 'slideshow') {
-  const slides = [
-    placeholder(1600, 533, '#171717', 'HydroTeam grafisch ontwerp'),
-    ...(photos || []).filter(Boolean),
-  ];
+  const slides = (photos || []).filter(Boolean);
 
   return `
     <div class="auto-slideshow" aria-label="Automatische slideshow">
@@ -194,8 +201,8 @@ function projectPanelHTML(project) {
     const chapterMarkup = project.chapters
       .map((chapter, index) => {
         const chapterPhotos = renderPhotoTrio(chapter.details, `chapter ${index + 1}`);
-        const chapterSlideshow = chapter.label === 'Grafisch ontwerp — Tussentijds'
-          ? renderAutoSlideshow(chapter.details, 'HydroTeam grafisch ontwerp')
+        const chapterSlideshow = chapter.slideshowText
+          ? `<div class="slideshow-text-box">${escapeHTML(chapter.slideshowText)}</div>${renderAutoSlideshow(chapter.slideshow || chapter.details, 'HydroTeam grafisch ontwerp')}`
           : '';
         const projectIntro = index === 0
           ? `<div class="exp-title">${escapeHTML(project.title || '')}</div><div class="exp-cat">${escapeHTML(project.cat || '')}</div>`
@@ -268,7 +275,19 @@ function toggleProjectSlice(slice, shouldOpen) {
   const isOpen = slice.classList.contains('open');
   const nextState = typeof shouldOpen === 'boolean' ? shouldOpen : !isOpen;
 
+  const closeProjectSlice = (item) => {
+    item.classList.remove('open');
+    item.setAttribute('aria-expanded', 'false');
+    requestAnimationFrame(() => {
+      item.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
+  };
+
   document.querySelectorAll('.slice.open').forEach((item) => {
+    if (item === slice && !nextState) {
+      closeProjectSlice(item);
+      return;
+    }
     item.classList.remove('open');
     item.setAttribute('aria-expanded', 'false');
   });

@@ -316,6 +316,7 @@ body.light-mode .theme-icon-moon { opacity: 1; transform: rotate(0) scale(1); }
 .slice {
   position: relative;
   width: 100%;
+  scroll-margin-top: 100px;
   overflow: hidden;
   cursor: pointer;
   border: 1px solid rgba(242, 242, 240, 0.14);
@@ -665,7 +666,7 @@ body.light-mode .slice-cat {
   position: relative;
   height: min(40vw, 460px);
   min-height: 300px;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
   overflow: hidden;
   background: var(--black);
 }
@@ -694,7 +695,6 @@ body.light-mode .slice-cat {
   border-radius: 0;
   background: var(--card-bg);
   margin-right: 8px;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
 }
 
 .quad-cell img {
@@ -711,6 +711,16 @@ body.light-mode .slice-cat {
   aspect-ratio: 3 / 1;
   overflow: hidden;
   background: var(--card-bg-alt);
+}
+
+.slideshow-text-box {
+  margin: 0;
+  padding: 24px var(--exp-inset);
+  background: var(--card-bg);
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--white);
+  max-width: none;
 }
 
 .auto-slide {
