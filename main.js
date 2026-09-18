@@ -34,11 +34,6 @@ const projects = [
         details: ["./Public/Foto's/ligier-05.webp", "./Public/Foto's/ligier-06.webp", "./Public/Foto's/ligier-07.webp"],
       },
       {
-        label: 'Design en productie — Vakantie',
-        desc: 'Tijdens de vakantie ben ik bezig geweest met het uittekenen van een productieklaar paneel. Dit aan de hand van complexe surfaces binnen solidworks. ',
-        details: ["", "", ""],
-      },
-      {
         label: 'Grafisch ontwerp — Tussentijds',
         desc: 'Naast het CAD werk neem ik ook sommige grafische taken van het team op mij. In de zomer van 2025 heb ik gewerkt rond hun nieuw logo en merch. Deze opdrachten zijn niet constant aangezien ik het druk genoeg heb met de technische kant van het team. Het blijft wel bij als een leuke ervaring en een teken van vertrouwen in wat ik doe als grafisch ontwerper.',
         details: ['./Public/Foto\'s/ht-01.webp', './Public/Foto\'s/ht-02.webp', './Public/Foto\'s/ht-03.webp'],
@@ -120,7 +115,9 @@ const projects = [
       { title: 'Hydroteam Logo',       img: "./Public/Foto's/Grafisch/graphic-05.webp" },
       { title: 'Dream Car Collective', img: "./Public/Foto's/Grafisch/graphic-03.webp" },
       { title: 'Jij Bent De Zomer',    img: "./Public/Foto's/Grafisch/graphic-06.webp" },
+      { title: 'Grafisch werk 02',     img: "./Public/Foto's/Grafisch/graphic-02.webp" },
       { title: 'Rough Edges',          img: "./Public/Foto's/Grafisch/graphic-09.webp" },
+      { title: 'Grafisch werk 04',     img: "./Public/Foto's/Grafisch/graphic-04.webp" },
       { title: 'Stof',                 img: "./Public/Foto's/Grafisch/graphic-12.webp" },
       { title: 'Sama Massages',        img: "./Public/Foto's/Grafisch/graphic-10.webp" },
       { title: '2Punt8',               img: "./Public/Foto's/Grafisch/graphic-01.webp" },
@@ -160,6 +157,21 @@ function renderPhotoTrio(photos, altPrefix = 'detail', focusPosition = 'center')
     .join('');
 }
 
+function renderAutoSlideshow(photos, altPrefix = 'slideshow') {
+  const slides = [
+    placeholder(1600, 533, '#171717', 'HydroTeam grafisch ontwerp'),
+    ...(photos || []).filter(Boolean),
+  ];
+
+  return `
+    <div class="auto-slideshow" aria-label="Automatische slideshow">
+      ${slides.map((src, index) => `
+        <img class="auto-slide${index === 0 ? ' is-active' : ''}" src="${src}" alt="${altPrefix} ${index + 1}" loading="lazy">
+      `).join('')}
+    </div>
+  `;
+}
+
 function renderSketchSlideshow(slides) {
   if (!slides?.length) return '';
 
@@ -182,6 +194,9 @@ function projectPanelHTML(project) {
     const chapterMarkup = project.chapters
       .map((chapter, index) => {
         const chapterPhotos = renderPhotoTrio(chapter.details, `chapter ${index + 1}`);
+        const chapterSlideshow = chapter.label === 'Grafisch ontwerp — Tussentijds'
+          ? renderAutoSlideshow(chapter.details, 'HydroTeam grafisch ontwerp')
+          : '';
         const projectIntro = index === 0
           ? `<div class="exp-title">${escapeHTML(project.title || '')}</div><div class="exp-cat">${escapeHTML(project.cat || '')}</div>`
           : '';
@@ -200,6 +215,7 @@ function projectPanelHTML(project) {
             </div>
           </div>
           ${chapterPhotos ? `<div class="exp-row--trio">${chapterPhotos}</div>` : ''}
+          ${chapterSlideshow}
           ${extraBlock}
         `;
       })
@@ -315,15 +331,18 @@ function createProjectSlice(project, index) {
 function createQuadGroup(project) {
   const row = document.createElement('div');
   row.className = 'quad-row';
+  const stage = document.createElement('div');
+  stage.className = 'quad-stage';
 
-  project.items.forEach((item) => {
+  [...project.items, ...project.items, ...project.items, ...project.items].forEach((item) => {
     const cell = document.createElement('div');
     cell.className = 'quad-cell';
     const src = item.img || placeholder(648, 648, project.bg, item.title);
     cell.innerHTML = `<img src="${src}" alt="${escapeHTML(item.title)}" loading="lazy">`;
-    row.appendChild(cell);
+    stage.appendChild(cell);
   });
 
+  row.appendChild(stage);
   return row;
 }
 
@@ -399,10 +418,13 @@ about.innerHTML = `
       <div class="about-name">Joren&nbsp;Lenaerts</div>
       <div class="about-role">Student · AP Antwerpen</div>
       <div class="about-bio">
-        <p>Als ontwerper en als persoon ben ik sterk verwonderd door mijn omgeving. Details en kleine imperfecties vallen mij snel op, waardoor ik steeds kritisch maar met een open blik naar mijn omgeving en mijn eigen werk kijk. Deze nieuwsgierigheid en kritische houding stimuleren mij om mezelf voortdurend te ontwikkelen.</p>
-        <p>Daarnaast ben ik een sociaal persoon die zich gemakkelijk aanpast aan nieuwe situaties en graag met verschillende mensen samenwerkt. Een belangrijke interesse binnen mijn ontwerpopleiding is CAD en productiegericht tekenen. Deze technische vaardigheden komen binnen HydroTeam goed van pas en bieden mij de mogelijkheid om mijn kennis in een praktische en technische context toe te passen.</p>
-        <p>Naast het technische aspect speelt automotive design een grote rol in mijn ontwikkeling als ontwerper. Mijn passie voor auto’s en automotive design vormt de belangrijkste motivatie binnen mijn ontwerpen en bepaalt mee het carrièrepad dat ik in de toekomst wil volgen.</p>
-        <a class="about-instagram" href="https://www.instagram.com/lenaerts_joren/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <p>Ik ben een ontwerper die technisch en creatief denkt. Mijn kracht ligt in conceptuele exploratie vooral het testen van ideeën, vormen, en zoeken naar antwoorden hierop. Dit geldt ook voor grafisch werk, vele concepten uitwerken en samenbrengen tot één groot geheel.</p>
+        <p>Mijn inspiratie komt uit verschillende hoeken. Skiën, wandelen en fotografie zorgen voor de nodige inspiratie uit de natuur. Daarnaast speelt automotive design een rol in mijn inspiratie. Ik ben constant details rondom mij aan het opnemen. Vormen, kleurencombinaties, lichtinvallen. Al deze waarnemingen geven me een kritische kijk op eigen  werk zowel grafisch als technisch, maar zijn aan de andere kant een oneindige bron van inspiratie.</p>
+        <p>Automotive design is mijn focus. De richting maakt niet uit zowel technisch, UX/UI, carwrapping interesseert me, zolang het automotive is. HydroTeam gaf me al een smaak van een technische startup-omgeving, maar dit is zeker niet waar ik wil stoppen. Ik hoop impact te maken binnen welk vakgebied ik ook terecht kom.</p>
+        <div class="about-links">
+          <a class="about-instagram" href="https://www.instagram.com/lenaerts_joren/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a id="about-contact" class="about-contact" href="mailto:Joren.lenaerts@outlook.com">Contact opnemen</a>
+        </div>
       </div>
     </div>
     <div class="about-photo-block">
@@ -423,6 +445,17 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
 document.querySelectorAll('.slice').forEach((slice) => observer.observe(slice));
+
+document.querySelectorAll('.auto-slideshow').forEach((slideshow) => {
+  const slides = [...slideshow.querySelectorAll('.auto-slide')];
+  let activeIndex = 0;
+
+  window.setInterval(() => {
+    slides[activeIndex].classList.remove('is-active');
+    activeIndex = (activeIndex + 1) % slides.length;
+    slides[activeIndex].classList.add('is-active');
+  }, 3500);
+});
 
 document.querySelector('a[href="#about"]')?.addEventListener('click', (event) => {
   event.preventDefault();
