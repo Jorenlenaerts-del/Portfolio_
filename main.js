@@ -4,7 +4,7 @@ const projects = [
     cat: 'Automotive · Fusion · Keyshot',
     img: "./Public/Foto's/nova-01.webp",
     details: ["./Public/Foto's/nova-02.webp", "./Public/Foto's/nova-03.webp", "./Public/Foto's/nova-04.webp"],
-    videoFile: "./Public/Foto's/Untitled design.mp4",
+    videoFile: "./Public/Foto's/nova-video.mp4",
     desc: 'NOVA is een conceptontwerp van kop- en achterlichten voor de sculpturale vorm van ECHO, een eerder project. De inspiratie voor dit ontwerp haalde ik uit modellen van Audi en Mercedes-Benz. Lichten bepalen voor een groot deel de uitstraling van een auto.',
     extra: 'Ik heb ervoor gekozen om enkel de lichten van ECHO in detail uit te werken, zodat ik meer detailwerk in het CAD-model kon stoppen. Dankzij dit detailwerk heb ik in KeyShot veelzijdig kunnen experimenteren, met een focus op blur- en motionrenders. Alle kleine elementen en details in het model hebben een grote impact op het renderen en zorgen voor een compleet beeld van het concept.',
     bg: '#10101a',
