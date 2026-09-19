@@ -65,6 +65,7 @@ const projects = [
     cat: 'UX design · Healthcare',
     img: "./Public/Foto's/curanova-01.webp",
     details: ["./Public/Foto's/curanova-02.webp", "./Public/Foto's/curanova-03.webp"],
+    pdf: "./Public/Foto's/curaNova_UXdesign_JorenLenaerts&FalkevVandenHeuvel.pdf",
     video: 'https://www.youtube.com/embed/a3V8hHtztDM',
     desc: 'In het kader van het vak User-Centered Design ontwikkelden we een product binnen een specifieke context, gebaseerd op Embodied Interactions en UX-theorie. De focus lag op de interactie tussen gebruiker en product, waarbij we theoretische inzichten vertaalden naar een tastbaar ontwerp. We kozen voor context drie: het ontwerpen van een product voor een dienst waarmee mensen met mentale gezondheidsproblemen anoniem steunende digitale brieven kunnen ontvangen van lotgenoten. Voor dit project werkte ik samen met Falke van den Heuvel.',
     extra: 'Tijdens dit proces zijn we door verschillende iteraties gegaan. Op zoek naar een handeling tussen product en gebruiker, maar ook naar de juiste vorm. Door onderzoek, personas, schetsen en feedback momenten zijn we gegroeid in het UX denkkader. ',
@@ -250,7 +251,10 @@ function projectPanelHTML(project) {
     <div class="exp-row--main">
       <div class="exp-text">
         <div>
-          <div class="exp-title">${escapeHTML(project.title || '')}</div>
+          <div class="exp-title-row">
+            <div class="exp-title">${escapeHTML(project.title || '')}</div>
+            ${project.pdf ? `<a class="exp-download" href="${escapeHTML(project.pdf)}" download aria-label="Download ${escapeHTML(project.title || 'project')} PDF">Bekijk volledig procesdocument</a>` : ''}
+          </div>
           <div class="exp-cat">${escapeHTML(project.cat || '')}</div>
           <p class="exp-desc">${escapeHTML(project.desc || '')}</p>
         </div>
@@ -336,6 +340,8 @@ function createProjectSlice(project, index) {
       toggleProjectSlice(slice, false);
       return;
     }
+
+    if (event.target.closest('.exp-download')) return;
 
     toggleProjectSlice(slice);
   });
