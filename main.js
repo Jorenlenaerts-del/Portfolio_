@@ -31,7 +31,7 @@ const projects = [
       },
       {
         label: 'Design en productie — Jaar 2',
-        desc: 'Tijdens het jaar zijn er veel factoren die het ontwerpprocces beinvloeden. Tijdens het jaar zijn er verschillende elementen veranderd. Zo heb ik in het begin van het jaar voor CAD tutorials gezorgd. Dit helpt het team te begrijpen hoe ze complexe ideen kunnen maken aan de hand van Imagine and shape in CATIA. In het tweede semester zijn we begonnen met iteraties op het voorgaande model. Hier is zowel een CFD als productie file van opgemaakt. Momenteel zijn we simulaties aan het uitvoeren en wordt het conceptmodel ge 3D print.',
+        desc: 'Tijdens het jaar zijn er veel factoren die het ontwerpprocces beinvloeden. Tijdens het jaar zijn er verschillende elementen veranderd. Zo heb ik in het begin van het jaar voor CAD tutorials gezorgd. Dit helpt het team te begrijpen hoe ze complexe ideen kunnen maken aan de hand van Imagine and shape in CATIA. In het tweede semester zijn we begonnen met iteraties op het voorgaande model. Hier is zowel een CFD als productie file van opgemaakt. Momenteel zijn we simulaties aan het uitvoeren en wordt het conceptmodel ge-3D print.',
         details: ["./Public/Foto's/ligier-05.webp", "./Public/Foto's/ligier-06.webp", "./Public/Foto's/ligier-07.webp"],
       },
       {
@@ -253,7 +253,7 @@ function projectPanelHTML(project) {
         <div>
           <div class="exp-title-row">
             <div class="exp-title">${escapeHTML(project.title || '')}</div>
-            ${project.pdf ? `<a class="exp-download" href="${escapeHTML(project.pdf)}" download aria-label="Download ${escapeHTML(project.title || 'project')} PDF">Bekijk volledig procesdocument</a>` : ''}
+            ${project.pdf ? `<a class="exp-download" href="${escapeHTML(project.pdf)}" download aria-label="Download ${escapeHTML(project.title || 'project')} PDF">Procesdocument</a>` : ''}
           </div>
           <div class="exp-cat">${escapeHTML(project.cat || '')}</div>
           <p class="exp-desc">${escapeHTML(project.desc || '')}</p>
@@ -447,8 +447,8 @@ about.innerHTML = `
       <div class="about-role">Student · AP Antwerpen</div>
       <div class="about-bio">
         <p>Ik ben een ontwerper die technisch en creatief denkt. Mijn kracht ligt in conceptuele exploratie vooral het testen van ideeën, vormen, en zoeken naar antwoorden hierop. Dit geldt ook voor grafisch werk, vele concepten uitwerken en samenbrengen tot één groot geheel.</p>
-        <p>Mijn inspiratie komt uit verschillende hoeken. Skiën, wandelen en fotografie zorgen voor de nodige inspiratie uit de natuur. Daarnaast speelt automotive design een rol in mijn inspiratie. Ik ben constant details rondom mij aan het opnemen. Vormen, kleurencombinaties, lichtinvallen. Al deze waarnemingen geven me een kritische kijk op eigen  werk zowel grafisch als technisch, maar zijn aan de andere kant een oneindige bron van inspiratie.</p>
-        <p>Automotive design is mijn focus. De richting maakt niet uit zowel technisch, UX/UI, carwrapping interesseert me, zolang het automotive is. HydroTeam gaf me al een smaak van een technische startup-omgeving, maar dit is zeker niet waar ik wil stoppen. Ik hoop impact te maken binnen welk vakgebied ik ook terecht kom.</p>
+        <p>Mijn inspiratie komt uit verschillende hoeken. Skiën, wandelen en fotografie zorgen voor de nodige inspiratie uit de natuur. Daarnaast speelt automotive design een rol in mijn inspiratie. Ik ben constant details rondom mij aan het opnemen. Vormen, kleurencombinaties, lichtinvallen. Al deze waarnemingen geven me een kritische kijk op eigen werk, zowel grafisch als technisch, Aan de andere kant zijn het oneindige bronnen van inspiratie.</p>
+        <p>Automotive design is mijn focus. De richting maakt niet uit: zowel technisch, UX/UI als carwrapping interesseert me sterk, zolang het automotive is. HydroTeam gaf me al een smaak van een technische startup-omgeving, maar dit is zeker niet waar ik wil stoppen. Ik hoop impact te maken binnen welk vakgebied ik ook terecht kom.</p>
         <div class="about-links">
           <a class="about-instagram" href="https://www.instagram.com/lenaerts_joren/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a id="about-contact" class="about-contact" href="mailto:Joren.lenaerts@outlook.com">Contact opnemen</a>
